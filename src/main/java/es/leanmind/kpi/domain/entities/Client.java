@@ -13,30 +13,4 @@ public final class Client {
         this.readings = readings;
         this.median = median;
     }
-
-//    public Double getMedian() {
-//        Object[] clientReadingsValues = readings
-//                .stream()
-//                .map(reading -> reading.value).toArray();
-//
-//        Arrays.sort(clientReadingsValues);
-//        double median;
-//        if (clientReadingsValues.length % 2 == 0)
-//            median = ((int)clientReadingsValues[clientReadingsValues.length/2] + (int)clientReadingsValues[clientReadingsValues.length/2 - 1])/2;
-//        else
-//            median = (int) clientReadingsValues[clientReadingsValues.length/2];
-//        return median;
-//    }
-//
-//    public List<Reading> getSuspiciousReadingsKpi() {
-//        int defaultSuspiciousClientThreshold = 5000;
-//        Double median = getMedian();
-//        return readings
-//                .stream()
-//                .filter(reading ->
-//                        median - defaultSuspiciousClientThreshold > reading.value
-//                                || median + defaultSuspiciousClientThreshold < reading.value
-//                )
-//                .toList();
-//    }
 }
