@@ -26,10 +26,11 @@ public class ClientMapper {
                                                     Integer.parseInt(value.reading)
                                             )
                                     ).toList();
+                            Double median = this.getMedian(clientReadings);
                             return new Client(
                                     entry.getKey(),
-                                    this.getSuspiciousReadingsKpi(clientReadings),
-                                    this.getMedian(clientReadings)
+                                    this.getSuspiciousReadingsKpi(clientReadings, median),
+                                    median
                             );
                         }
                 ).toList();
@@ -50,8 +51,7 @@ public class ClientMapper {
         return median;
     }
 
-    private List<Reading> getSuspiciousReadingsKpi(List<Reading> readings) {
-        Double median = getMedian(readings);
+    private List<Reading> getSuspiciousReadingsKpi(List<Reading> readings, Double median) {
         double threshold = median * 0.5;
         return readings
                 .stream()
