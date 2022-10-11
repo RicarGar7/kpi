@@ -51,14 +51,16 @@ public class ClientMapper {
     }
 
     private List<Reading> getSuspiciousReadingsKpi(List<Reading> readings) {
-        int defaultSuspiciousClientThreshold = 5000;
         Double median = getMedian(readings);
+        double threshold = median * 0.5;
         return readings
                 .stream()
-                .filter(reading ->
-                        median - defaultSuspiciousClientThreshold > reading.value
-                                || median + defaultSuspiciousClientThreshold < reading.value
-                )
+                .filter(reading -> isSuspicious(median, threshold, reading))
                 .toList();
+    }
+
+    private boolean isSuspicious(Double median, double defaultSuspiciousClientThreshold, Reading reading) {
+        return median - defaultSuspiciousClientThreshold > reading.value
+                || median + defaultSuspiciousClientThreshold < reading.value;
     }
 }
